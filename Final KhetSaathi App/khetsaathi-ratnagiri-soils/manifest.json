@@ -1,0 +1,17 @@
+{
+  "name": "KhetSaathi — Farming Decision Assistant",
+  "short_name": "KhetSaathi",
+  "description": "Free crop recommendation, market prices, nearby agri-input sellers and a plant disease scanner for farmers.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F2F0E2",
+  "theme_color": "#123326",
+  "lang": "en",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

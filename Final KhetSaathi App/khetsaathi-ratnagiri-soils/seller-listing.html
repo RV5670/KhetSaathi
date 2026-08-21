@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>List your agri shop — KhetSaathi</title>
+<meta name="description" content="A separate self-service listing page for agricultural input shops." />
+<link rel="stylesheet" href="./css/style.css" />
+</head>
+<body>
+<main class="app-main" style="max-width:480px;margin:0 auto;padding-top:32px;">
+  <a class="detail-link" href="./index.html">← Back to KhetSaathi</a>
+  <h1 class="section-title" style="margin-top:20px;">List your agri shop</h1>
+  <p class="section-sub">This owner portal is separate from the farmer app. Your listing appears to farmers nearby after it is submitted.</p>
+
+  <form id="sellerListingForm" class="card" novalidate>
+    <div class="field"><label for="shopName">Shop name *</label><input id="shopName" name="name" required maxlength="100" autocomplete="organization" /></div>
+    <div class="field"><label for="shopPhone">Phone / WhatsApp *</label><input id="shopPhone" name="phone" required inputmode="tel" maxlength="25" autocomplete="tel" /></div>
+    <div class="field"><label for="shopAddress">Shop address *</label><textarea id="shopAddress" name="address" required maxlength="250" rows="3"></textarea></div>
+    <div class="field"><label for="shopCategory">Main products</label><select id="shopCategory" name="category"><option value="Seeds & inputs">Seeds & inputs</option><option value="Fertilizer & crop protection">Fertilizer & crop protection</option><option value="Irrigation & tools">Irrigation & tools</option><option value="Mixed agri supplies">Mixed agri supplies</option></select></div>
+    <div class="field"><label>Shop location *</label><button class="btn secondary" type="button" id="shopLocationBtn">Use my shop location</button><div class="status-line" id="shopLocationStatus"><span class="dot"></span> Location not added</div></div>
+    <input type="hidden" id="shopLat" name="lat" />
+    <input type="hidden" id="shopLon" name="lon" />
+    <label class="consent-row"><input type="checkbox" id="shopConsent" required /> I confirm that I own or represent this shop and may publish these details.</label>
+    <button class="btn mt" type="submit" id="submitListingBtn">Submit free listing</button>
+    <div class="status-line" id="listingStatus" aria-live="polite"></div>
+  </form>
+
+  <p class="section-sub" style="margin:16px 0 36px;">Please provide a real shop location. Listings that are incomplete, misleading, or unrelated to agriculture can be removed.</p>
+</main>
+<script src="./js/config.js"></script>
+<script src="./js/api.js"></script>
+<script src="./js/seller-listing.js"></script>
+</body>
+</html>

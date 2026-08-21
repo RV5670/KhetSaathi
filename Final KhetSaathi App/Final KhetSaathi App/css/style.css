@@ -1,0 +1,266 @@
+/* ============================================================
+   KISAN MITRA — style.css
+   Design language: working farmland, not a generic dashboard.
+   Palette grounded in soil, monsoon sky and turmeric.
+   High contrast throughout — used outdoors, in sunlight,
+   often on cheap Android screens.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700;800&display=swap');
+
+:root{
+  --paper:#F2F0E2;
+  --surface:#FFFFFF;
+  --ink:#16241B;
+  --ink-soft:#4E5D51;
+  --line:#DAD5C0;
+
+  --green-900:#123326;
+  --green-700:#1F4D36;
+  --green-100:#E6EEE4;
+
+  --gold-600:#B9821F;
+  --gold-500:#E1A730;
+  --gold-100:#FBEDCB;
+
+  --rust-700:#7A3F27;
+  --sky-600:#2F6690;
+  --danger:#A83B32;
+
+  --radius-s:10px;
+  --radius-m:16px;
+  --radius-l:24px;
+
+  --font-display:'Fraunces', Georgia, serif;
+  --font-body:'Public Sans', -apple-system, Roboto, sans-serif;
+
+  --shadow-card: 0 1px 2px rgba(18,51,38,0.06), 0 6px 16px rgba(18,51,38,0.08);
+}
+
+*{ box-sizing:border-box; }
+html,body{ height:100%; }
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--font-body);
+  -webkit-font-smoothing:antialiased;
+  overscroll-behavior-y:none;
+}
+
+.app-shell{
+  max-width:480px;
+  margin:0 auto;
+  min-height:100dvh;
+  background:var(--paper);
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  box-shadow: 0 0 40px rgba(0,0,0,0.08);
+}
+@media (min-width:481px){
+  body{ background: linear-gradient(180deg,#E9E4CE,#DDD6BB); }
+  .app-shell{ margin:24px auto; min-height:calc(100dvh - 48px); border-radius:28px; overflow:hidden; }
+}
+
+/* ---------- Furrow motif: the signature element ----------
+   Repeating hand-drawn-feeling contour lines, like a ploughed
+   field seen from above. Used behind the header and as a
+   section divider — ties every screen back to soil & rows. */
+.furrow{
+  background-image: repeating-linear-gradient(
+    178deg,
+    rgba(255,255,255,0.10) 0px,
+    rgba(255,255,255,0.10) 2px,
+    transparent 2px,
+    transparent 13px
+  );
+}
+
+/* ---------- Header ---------- */
+.app-header{
+  background: radial-gradient(140% 100% at 20% 0%, var(--green-700), var(--green-900));
+  color:#fff;
+  padding:20px 20px 26px;
+  position:relative;
+  overflow:hidden;
+}
+.app-header::after{
+  content:"";
+  position:absolute; inset:0;
+  background-image: repeating-linear-gradient(100deg, rgba(255,255,255,0.06) 0 2px, transparent 2px 22px);
+  pointer-events:none;
+}
+.app-header-row{ display:flex; align-items:center; justify-content:space-between; position:relative; z-index:1; }
+.brand{ display:flex; align-items:center; gap:10px; }
+.brand-mark{ width:34px; height:34px; flex:none; }
+.brand-name{ font-family:var(--font-display); font-weight:700; font-size:1.28rem; letter-spacing:0.2px; }
+.brand-tagline{ font-size:0.72rem; opacity:0.78; margin-top:1px; font-weight:500; }
+.lang-btn{
+  background:rgba(255,255,255,0.14); color:#fff; border:1px solid rgba(255,255,255,0.3);
+  border-radius:999px; padding:6px 12px; font-size:0.74rem; font-weight:700; cursor:pointer;
+}
+.lang-btn:active{ background:rgba(255,255,255,0.26); }
+
+/* ---------- Main content ---------- */
+.app-main{ flex:1; padding:18px 18px 100px; }
+.screen{ display:none; animation:fadein 0.25s ease; }
+.screen.active{ display:block; }
+@keyframes fadein{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;} }
+
+.section-title{ font-family:var(--font-display); font-size:1.5rem; font-weight:700; margin:2px 0 4px; color:var(--green-900); }
+.section-sub{ font-size:0.88rem; color:var(--ink-soft); margin:0 0 18px; line-height:1.45; }
+
+.card{
+  background:var(--surface);
+  border-radius:var(--radius-m);
+  padding:18px;
+  box-shadow:var(--shadow-card);
+  margin-bottom:16px;
+  border:1px solid rgba(18,51,38,0.05);
+}
+
+.field{ margin-bottom:16px; }
+.field label{ display:block; font-size:0.8rem; font-weight:700; color:var(--green-900); margin-bottom:7px; }
+select, input[type=text], input[type=number], input[type=tel], textarea{
+  width:100%; font-family:var(--font-body); font-size:0.96rem; font-weight:600;
+  padding:12px 14px; border-radius:var(--radius-s); border:1.5px solid var(--line);
+  background:var(--paper); color:var(--ink); appearance:none;
+}
+select:focus, input:focus{ outline:2.5px solid var(--gold-500); outline-offset:1px; border-color:var(--gold-500); }
+textarea{ font:inherit; resize:vertical; }
+.consent-row{ display:flex; align-items:flex-start; gap:8px; font-size:0.76rem; line-height:1.4; color:var(--ink-soft); }
+.consent-row input{ margin-top:2px; flex:none; }
+
+.chip-row{ display:flex; flex-wrap:wrap; gap:8px; }
+.chip{
+  padding:9px 14px; border-radius:999px; border:1.5px solid var(--line); background:var(--surface);
+  font-weight:700; font-size:0.84rem; cursor:pointer; color:var(--ink-soft); user-select:none;
+}
+.chip.selected{ background:var(--green-700); border-color:var(--green-700); color:#fff; }
+
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  width:100%; padding:14px 16px; border-radius:var(--radius-s); border:none;
+  font-family:var(--font-body); font-weight:800; font-size:0.98rem; cursor:pointer;
+  background:var(--gold-500); color:var(--green-900);
+}
+.btn:active{ background:var(--gold-600); }
+.btn.secondary{ background:var(--green-100); color:var(--green-900); }
+.btn.ghost{ background:transparent; color:var(--green-700); border:1.5px solid var(--green-700); }
+.btn:disabled{ opacity:0.55; cursor:default; }
+.btn-icon{ width:18px; height:18px; flex:none; }
+
+.status-line{ display:flex; align-items:center; gap:8px; font-size:0.82rem; color:var(--ink-soft); margin-top:10px; }
+.dot{ width:7px; height:7px; border-radius:50%; background:var(--gold-500); flex:none; }
+.dot.live{ background:var(--green-700); }
+
+/* ---------- Recommendation result cards ---------- */
+.rank-badge{
+  width:30px; height:30px; border-radius:9px; background:var(--green-700); color:#fff;
+  display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-weight:700; flex:none;
+}
+.crop-card{ display:flex; flex-direction:column; gap:10px; }
+.crop-card-top{ display:flex; align-items:center; gap:12px; }
+.crop-name{ font-family:var(--font-display); font-weight:700; font-size:1.12rem; color:var(--green-900); }
+.crop-meta{ font-size:0.76rem; color:var(--ink-soft); }
+.badge{ margin-left:auto; background:var(--gold-100); color:var(--gold-600); font-size:0.7rem; font-weight:800; padding:4px 9px; border-radius:999px; white-space:nowrap; }
+.match-bar-track{ height:7px; border-radius:99px; background:var(--green-100); overflow:hidden; }
+.match-bar-fill{ height:100%; background:linear-gradient(90deg,var(--green-700),var(--gold-500)); border-radius:99px; }
+.stat-row{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; margin-top:2px; }
+.stat{ background:var(--paper); border-radius:var(--radius-s); padding:9px 8px; text-align:center; }
+.stat-value{ font-family:var(--font-display); font-weight:700; font-size:0.98rem; color:var(--green-900); }
+.stat-label{ font-size:0.64rem; color:var(--ink-soft); text-transform:uppercase; letter-spacing:0.4px; margin-top:2px; }
+.detail-link{ font-size:0.8rem; font-weight:700; color:var(--rust-700); text-decoration:underline; cursor:pointer; align-self:flex-start; }
+
+/* ---------- Simple SVG bar chart (profit breakdown) ---------- */
+.chart-legend{ display:flex; gap:16px; font-size:0.76rem; color:var(--ink-soft); margin-top:8px; flex-wrap:wrap; }
+.legend-dot{ width:9px; height:9px; border-radius:2px; display:inline-block; margin-right:5px; vertical-align:middle; }
+
+/* ---------- Market ---------- */
+.price-row{ display:flex; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid var(--line); }
+.price-row:last-child{ border-bottom:none; }
+.price-crop{ font-weight:700; font-size:0.92rem; color:var(--green-900); }
+.price-value{ margin-left:auto; text-align:right; }
+.price-num{ font-family:var(--font-display); font-weight:700; font-size:1.02rem; }
+.price-unit{ font-size:0.68rem; color:var(--ink-soft); }
+.price-tag{ font-size:0.62rem; font-weight:800; padding:2px 7px; border-radius:6px; }
+.price-tag.live{ background:var(--green-100); color:var(--green-700); }
+.price-tag.ref{ background:var(--gold-100); color:var(--gold-600); }
+
+/* ---------- Sellers ---------- */
+.seller-card{ display:flex; gap:12px; align-items:flex-start; }
+.seller-icon{ width:38px; height:38px; border-radius:10px; background:var(--rust-700); flex:none; display:flex; align-items:center; justify-content:center; }
+.seller-name{ font-weight:700; color:var(--green-900); font-size:0.94rem; }
+.seller-sub{ font-size:0.78rem; color:var(--ink-soft); margin-top:2px; }
+.seller-dist{ margin-left:auto; font-weight:800; color:var(--rust-700); font-size:0.82rem; white-space:nowrap; }
+.seller-source{ display:inline-block; margin-left:6px; padding:2px 6px; border-radius:999px; background:var(--green-100); color:var(--green-700); font-size:0.62rem; vertical-align:middle; }
+.seller-listing-link{ display:block; width:max-content; max-width:100%; margin:12px auto 0; color:var(--rust-700); font-size:0.82rem; font-weight:800; text-decoration:underline; }
+
+/* ---------- Disease scanner ---------- */
+.upload-zone{
+  border:2px dashed var(--line); border-radius:var(--radius-m); padding:28px 16px; text-align:center;
+  background:var(--surface); cursor:pointer;
+}
+.upload-zone svg{ width:34px; height:34px; color:var(--green-700); margin-bottom:8px; }
+.preview-img{ width:100%; border-radius:var(--radius-m); display:block; margin-bottom:14px; max-height:280px; object-fit:cover; }
+.confidence-track{ height:8px; border-radius:99px; background:var(--green-100); overflow:hidden; margin:4px 0 2px; }
+.confidence-fill{ height:100%; background:var(--gold-500); }
+.spinner{ width:22px; height:22px; border:3px solid var(--green-100); border-top-color:var(--green-700); border-radius:50%; animation:spin 0.8s linear infinite; margin:0 auto; }
+@keyframes spin{ to{ transform:rotate(360deg); } }
+
+.empty-state{ text-align:center; padding:36px 16px; color:var(--ink-soft); }
+.empty-state svg{ width:40px; height:40px; margin-bottom:10px; color:var(--line); }
+
+/* ---------- Bottom nav ---------- */
+.bottom-nav{
+  position:absolute; left:0; right:0; bottom:0;
+  display:flex; background:var(--surface); border-top:1px solid var(--line);
+  padding:8px 6px calc(8px + env(safe-area-inset-bottom));
+  z-index:10;
+}
+.nav-btn{
+  flex:1; display:flex; flex-direction:column; align-items:center; gap:4px;
+  background:none; border:none; padding:8px 4px; color:var(--ink-soft); font-family:var(--font-body);
+  font-size:0.68rem; font-weight:700; cursor:pointer;
+}
+.nav-btn svg{ width:22px; height:22px; }
+.nav-btn.active{ color:var(--green-700); }
+.nav-btn.active svg{ color:var(--green-700); }
+
+/* ---------- Toast ---------- */
+.toast{
+  position:fixed; left:16px; right:16px; bottom:78px; max-width:448px; margin:0 auto;
+  background:var(--ink); color:#fff;
+  padding:12px 16px; border-radius:var(--radius-s); font-size:0.84rem; font-weight:600;
+  opacity:0; pointer-events:none; transition:opacity 0.25s, transform 0.25s; transform:translateY(6px);
+  z-index:20;
+}
+.toast.show{ opacity:1; transform:none; }
+
+/* ---------- Modal (yield & profit detail) ----------
+   Fixed (not absolute) so it anchors to the viewport, not to the
+   full scrollable height of the page — otherwise on a long results
+   list the sheet would render below the visible fold. */
+.modal-backdrop{
+  position:fixed; inset:0; max-width:480px; margin:0 auto;
+  background:rgba(18,51,38,0.45); display:none; align-items:flex-end; z-index:30;
+}
+.modal-backdrop.show{ display:flex; }
+.modal-sheet{
+  background:var(--paper); width:100%; max-height:86%; overflow-y:auto; border-radius:22px 22px 0 0;
+  padding:20px 18px calc(20px + env(safe-area-inset-bottom)); animation:sheetup 0.22s ease;
+}
+@keyframes sheetup{ from{ transform:translateY(24px); opacity:0.6; } to{ transform:none; opacity:1; } }
+.modal-close{ width:36px; height:4px; background:var(--line); border-radius:99px; margin:0 auto 16px; }
+
+/* ---------- Utility ---------- */
+.row{ display:flex; align-items:center; gap:10px; }
+.mt{ margin-top:14px; }
+.visually-hidden{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); }
+.skeleton{ background:linear-gradient(90deg,var(--line) 25%,#eee6 37%,var(--line) 63%); background-size:400% 100%; animation:shimmer 1.4s ease infinite; border-radius:var(--radius-s); }
+@keyframes shimmer{ 0%{background-position:100% 0;} 100%{background-position:-100% 0;} }
+
+@media (prefers-reduced-motion: reduce){
+  *{ animation-duration:0.001ms !important; transition-duration:0.001ms !important; }
+}
